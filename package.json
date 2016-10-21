@@ -1,0 +1,20 @@
+{
+  "name": "MakerWear-Blockly",
+  "version": "0.1.0",
+  "description": "A Visual Programming Tool for MakerWear",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/myjeeed/MakerWearBlockly",
+  "keywords": [
+    "Tool",
+    "Programming",
+    "Visual",
+    "Electron"
+  ],
+  "author": "Majeed Kazemitabaar",
+  "devDependencies": {
+    "electron": "^1.4.1"
+  }
+}
