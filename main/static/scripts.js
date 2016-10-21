@@ -37,18 +37,6 @@ function restore_blocks() {
 }
 
 /**
-* Save Arduino generated code to local file.
-*/
-function saveCode() {
-  var fileName = window.prompt('What would you like to name your file?', 'BlocklyDuino')
-  //doesn't save if the user quits the save prompt
-  if(fileName){
-    var blob = new Blob([Blockly.Arduino.workspaceToCode()], {type: 'text/plain;charset=utf-8'});
-    saveAs(blob, fileName + '.ino');
-  }
-}
-
-/**
  * Save blocks to local file.
  * better include Blob and FileSaver for browser compatibility
  */
@@ -202,57 +190,6 @@ function load_by_url(uri) {
 　　ajax.send ("");
 }
 
-function uploadCode(code, callback) {
-    var target = document.getElementById('content_arduino');
-    var spinner = new Spinner().spin(target);
-
-    var url = "http://127.0.0.1:8000/";
-    var method = "POST";
-
-    // You REALLY want async = true.
-    // Otherwise, it'll block ALL execution waiting for server response.
-    var async = true;
-
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-        if (request.readyState != 4) {
-            return;
-        }
-
-        spinner.stop();
-
-        var status = parseInt(request.status); // HTTP response status, e.g., 200 for "200 OK"
-        var errorInfo = null;
-        switch (status) {
-        case 200:
-            break;
-        case 0:
-            errorInfo = "code 0\n\nCould not connect to server at " + url + ".  Is the local web server running?";
-            break;
-        case 400:
-            errorInfo = "code 400\n\nBuild failed - probably due to invalid source code.  Make sure that there are no missing connections in the blocks.";
-            break;
-        case 500:
-            errorInfo = "code 500\n\nUpload failed.  Is the Arduino connected to USB port?";
-            break;
-        case 501:
-            errorInfo = "code 501\n\nUpload failed.  Is 'ino' installed and in your path?  This only works on Mac OS X and Linux at this time.";
-            break;
-        default:
-            errorInfo = "code " + status + "\n\nUnknown error.";
-            break;
-        };
-
-        callback(status, errorInfo);
-    };
-
-    request.open(method, url, async);
-    request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-    request.send(code);
-}
-
-
 function uploadClick() {
     //code now has the string value for the code. We can write this as an Arduino file.
     var code = Blockly.Arduino.workspaceToCode();
@@ -265,43 +202,5 @@ function uploadClick() {
         console.log("The file was saved!");
     });
 
-    // var cmd = 'cd ~/Users/Majeed/Documents/MakerWearProgrammer/output';
-    // exec(cmd, function(error, stdout, stderr) {
-    //   console.log(stdout);
-    // });
-    //
-    // cmd = 'make';
-    // exec(cmd, function(error, stdout, stderr) {
-    //   console.log(stdout);
-    // });
-    //
-    // cmd = '/Applications/Arduino.app/Contents/Java/hardware/tools/avr/bin/avrdude -C/Applications/Arduino.app/Contents/Java/hardware/tools/avr/etc/avrdude.conf -v -patmega328p -carduino -P/dev/cu.usbmodem1421 -b115200 -D -U flash:w:/Users/Majeed/Documents/MakerWearProgrammer/output/build-uno/output.hex';
-    // exec(cmd, function(error, stdout, stderr) {
-    //     console.log(stdout);
-    // });
-
-
     cmd.run('./upload.sh');
-    
-
-    //
-    // alert("Ready to upload to Arduino.");
-    //
-    // uploadCode(code, function(status, errorInfo) {
-    //     if (status == 200) {
-    //         alert("Program uploaded ok");
-    //     } else {
-    //         alert("Error uploading program: " + errorInfo);
-    //     }
-    // });
-}
-
-function resetClick() {
-    var code = "void setup() {} void loop() {}";
-
-    uploadCode(code, function(status, errorInfo) {
-        if (status != 200) {
-            alert("Error resetting program: " + errorInfo);
-        }
-    });
 }

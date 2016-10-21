@@ -13,7 +13,7 @@ function createWindow () {
   mainWindow = new BrowserWindow({width: 1100, height: 650})
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/Blockly/apps/blocklyduino/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/main/index.html`)
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
