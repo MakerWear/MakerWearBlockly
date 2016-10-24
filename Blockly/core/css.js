@@ -138,6 +138,11 @@ Blockly.Css.setCursor = function(cursor) {
  * Array making up the CSS content for Blockly.
  */
 Blockly.Css.CONTENT = [
+    '@font-face {',
+    'font-family: Museo300;',
+    'src: url("static/fonts/Museo300-Regular.otf") format("opentype");',
+    '}',
+
   '.blocklySvg {',
   '  background-color: #fff;',
   '  outline: none;',
@@ -156,7 +161,7 @@ Blockly.Css.CONTENT = [
   '  box-shadow: 4px 4px 20px 1px rgba(0,0,0,.15);',
   '  color: #000;',
   '  display: none;',
-  '  font-family: sans-serif;',
+  '  font-family: Museo300;',
   '  font-size: 9pt;',
   '  opacity: 0.9;',
   '  padding: 2px;',
@@ -223,7 +228,7 @@ Blockly.Css.CONTENT = [
   '.blocklyText {',
   '  cursor: default;',
   '  fill: #fff;',
-  '  font-family: sans-serif;',
+  '  font-family: Museo300;',
   '  font-size: 11pt;',
   '}',
 
@@ -294,7 +299,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyHtmlInput {',
   '  border: none;',
-  '  font-family: sans-serif;',
+  '  font-family: Museo300;',
   '  font-size: 11pt;',
   '  outline: none;',
   '  width: 100%',
@@ -457,7 +462,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyTreeLabel {',
   '  cursor: default;',
-  '  font-family: sans-serif;',
+  '  font-family: Museo300;',
   '  font-size: 16px;',
   '  padding: 0 3px;',
   '  vertical-align: middle;',
@@ -542,7 +547,7 @@ Blockly.Css.CONTENT = [
   '  border-style: solid;',
   '  border-width: 1px;',
   '  cursor: default;',
-  '  font: normal 13px Arial, sans-serif;',
+  '  font: normal 13px Museo300;',
   '  margin: 0;',
   '  outline: none;',
   '  padding: 4px 0;',
@@ -581,7 +586,7 @@ Blockly.Css.CONTENT = [
    */
   '.blocklyWidgetDiv .goog-menuitem {',
   '  color: #000;',
-  '  font: normal 13px Arial, sans-serif;',
+  '  font: normal 13px Museo300, Museo300;',
   '  list-style: none;',
   '  margin: 0;',
      /* 28px on the left for icon or checkbox; 7em on the right for shortcut. */
@@ -613,7 +618,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyWidgetDiv .goog-menuitem-content {',
   '  color: #000;',
-  '  font: normal 13px Arial, sans-serif;',
+  '  font: normal 13px Museo300;',
   '}',
 
   /* State: disabled. */

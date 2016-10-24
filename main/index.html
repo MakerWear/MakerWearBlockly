@@ -2,11 +2,37 @@
 <head>
   <meta charset="utf-8">
   <title>MakerWear Visual Programming Tool</title>
-  <script type="text/javascript" src="../Blockly/blockly_compressed.js"></script>
-  <script type="text/javascript" src="../Blockly/blocks_compressed.js"></script>
-  <script type="text/javascript" src="../Blockly/arduino_compressed.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/style.css">
+  <script type="text/javascript" src="../Blockly/blockly_uncompressed.js"></script>
+  <!-- <script type="text/javascript" src="../Blockly/blocks_compressed.js"></script> -->
+  <!-- <script type="text/javascript" src="../Blockly/arduino_compressed.js"></script> -->
   <script type="text/javascript" src="../Blockly/msg/js/en.js"></script>
   <script type="text/javascript" src="static/scripts.js"></script>
+
+  <!-- Hacking the blocks: -->
+  <script src="../Blockly/blocks/base.js"></script>
+  <script src="../Blockly/blocks/colour.js"></script>
+  <script src="../Blockly/blocks/grove.js"></script>
+  <script src="../Blockly/blocks/lists.js"></script>
+  <script src="../Blockly/blocks/logic.js"></script>
+  <script src="../Blockly/blocks/loops.js"></script>
+  <script src="../Blockly/blocks/math.js"></script>
+  <script src="../Blockly/blocks/procedures.js"></script>
+  <script src="../Blockly/blocks/text.js"></script>
+  <script src="../Blockly/blocks/variables.js"></script>
+
+  <!-- Hacking the generators: -->
+  <script src="../Blockly/generators/arduino.js"></script>
+  <script src="../Blockly/generators/arduino/base.js"></script>
+  <script src="../Blockly/generators/arduino/control.js"></script>
+  <script src="../Blockly/generators/arduino/grove.js"></script>
+  <script src="../Blockly/generators/arduino/logic.js"></script>
+  <script src="../Blockly/generators/arduino/math.js"></script>
+  <script src="../Blockly/generators/arduino/procedures.js"></script>
+  <script src="../Blockly/generators/arduino/text.js"></script>
+  <script src="../Blockly/generators/arduino/variables.js"></script>
+
+
   <script>
   /**
    * List of tab names.
@@ -128,6 +154,7 @@
     //};
 
     var container = document.getElementById('content_area');
+
     var onresize = function(e) {
       var bBox = getBBox_(container);
       for (var i = 0; i < TABS_.length; i++) {
@@ -154,20 +181,14 @@
     Blockly.inject(document.getElementById('content_blocks'),
         {grid:
             {spacing: 25,
-             length: 3,
+             length: 2,
              colour: '#ccc',
              snap: true},
          media: '../Blockly/media/',
-         toolbox: toolbox});
+         toolbox: toolbox}); //Tree structure of categories and blocks available to the user.
 
     auto_save_and_restore_blocks();
 
-    //load from url parameter (single param)
-    //http://stackoverflow.com/questions/2090551/parse-query-string-in-javascript
-    var dest = unescape(location.search.replace(/^.*\=/, '')).replace(/\+/g, " ");
-    if(dest){
-      load_by_url(dest);
-    }
   }
 
   </script>
@@ -296,9 +317,9 @@
             <td class="tabmax">
               <button type="button" onclick="uploadClick()">Upload</button>
 
-              <button onclick="discard()">Discard</button>
-              <button onclick="save()">Save XML</button>
-              <button id="fakeload">Load XML</button>
+              <!-- <button onclick="discard()">Discard</button> -->
+              <!-- <button onclick="save()">Save XML</button> -->
+              <!-- <button id="fakeload">Load XML</button> -->
               <input type="file" id="load" style="display: none;"/>
               <!--button class="launch" onclick="runJS()">Run Program</button-->
             </td>
@@ -315,14 +336,14 @@
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
-    <category name="Logic">
+    <category name="Logic" colour="210">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
       <block type="logic_null"></block>
     </category>
-    <category name="Control">
+    <category name="Control" colour="110">
       <block type="base_delay">
         <value name="DELAY_TIME">
           <block type="math_number">
@@ -344,7 +365,7 @@
       </block>
       <block type="controls_whileUntil"></block>
     </category>
-    <category name="Math">
+    <category name="Math" color="330">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="base_map">
