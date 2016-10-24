@@ -21,6 +21,8 @@
   <script src="../Blockly/blocks/text.js"></script>
   <script src="../Blockly/blocks/variables.js"></script>
 
+  <script src="../Blockly/blocks/makerwear.js"></script>
+
   <!-- Hacking the generators: -->
   <script src="../Blockly/generators/arduino.js"></script>
   <script src="../Blockly/generators/arduino/base.js"></script>
@@ -31,6 +33,8 @@
   <script src="../Blockly/generators/arduino/procedures.js"></script>
   <script src="../Blockly/generators/arduino/text.js"></script>
   <script src="../Blockly/generators/arduino/variables.js"></script>
+
+  <script src="../Blockly/generators/arduino/makerwear.js"></script>
 
 
   <script>
@@ -181,8 +185,8 @@
     Blockly.inject(document.getElementById('content_blocks'),
         {grid:
             {spacing: 25,
-             length: 2,
-             colour: '#ccc',
+             length: 0,
+             colour: '#fff',
              snap: true},
          media: '../Blockly/media/',
          toolbox: toolbox}); //Tree structure of categories and blocks available to the user.
@@ -336,6 +340,10 @@
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
+    <category name="MakerWear" colour="270">
+        <block type="read_input"></block>
+        <block type="write_output"></block>
+    </category>
     <category name="Logic" colour="210">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
