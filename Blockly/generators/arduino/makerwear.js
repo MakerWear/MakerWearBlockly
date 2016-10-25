@@ -45,6 +45,21 @@ Blockly.Arduino['write_output'] = function(block) {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+//MakerWear Specific Modules
+//Sensors
+
+Blockly.Arduino['motion_intensity'] = function(block) {
+  var dropdown_input_number = block.getFieldValue('input_number');
+  var code = 'analogRead('+dropdown_input_number+')';
+
+  return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+//Actions
+//Modifiers
+//Power
+//Misc
+
 // Blockly.Arduino.grove_led = function() {
 //   var dropdown_pin = this.getFieldValue('PIN');
 //   var dropdown_stat = this.getFieldValue('STAT');

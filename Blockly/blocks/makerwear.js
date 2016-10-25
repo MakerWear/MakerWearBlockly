@@ -38,8 +38,7 @@ Blockly.Blocks['read_input'] = {
         .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "adc_channel");
     this.setOutput(true, null);
     this.setColour(270);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
+    this.setTooltip('read an input');
   }
 };
 
@@ -56,9 +55,26 @@ Blockly.Blocks['write_output'] = {
     this.setNextStatement(true, null);
     this.setColour(270);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
   }
 };
+
+//MakerWear Specific Modules
+//Sensors
+
+Blockly.Blocks['motion_intensity'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("motion intensity")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, null);
+    this.setTooltip('');
+  }
+};
+
+//Actions
+//Modifiers
+//Power
+//Misc
 
 
 // Blockly.Blocks['grove_led'] = {
