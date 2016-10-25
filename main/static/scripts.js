@@ -4,6 +4,89 @@ const exec = require('child_process').exec;
 const cmd = require('node-cmd');
 
 
+  /**
+   * Populate the currently selected pane with content generated from the blocks.
+   */
+  function renderContent() {
+    var content = document.getElementById('content_blocks');
+    // Initialize the pane.
+    if (content.id == 'content_blocks') {
+      // If the workspace was changed by the XML tab, Firefox will have performed
+      // an incomplete rendering due to Blockly being invisible.  Rerender.
+      Blockly.mainWorkspace.render();
+    }
+  }
+
+  /**
+   * Compute the absolute coordinates and dimensions of an HTML element.
+   * @param {!Element} element Element to match.
+   * @return {!Object} Contains height, width, x, and y properties.
+   * @private
+   */
+  function getBBox_(element) {
+    var height = element.offsetHeight;
+    var width = element.offsetWidth;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    return {
+      height: height,
+      width: width,
+      x: x,
+      y: y
+    };
+  }
+
+  /**
+   * Initialize Blockly.  Called on page load.
+   */
+  function init() {
+    //window.onbeforeunload = function() {
+    //  return 'Leaving this page will result in the loss of your work.';
+    //};
+
+    var container = document.getElementById('content_area');
+
+    var onresize = function(e) {
+      var bBox = getBBox_(container);
+
+    var el = document.getElementById('content_blocks');
+    el.style.top = bBox.y + 'px';
+    el.style.left = bBox.x + 'px';
+    // Height and width need to be set, read back, then set again to
+    // compensate for scrollbars.
+    el.style.height = bBox.height + 'px';
+    el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
+    el.style.width = bBox.width + 'px';
+    el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
+
+    };
+    window.addEventListener('resize', onresize, false);
+
+    var toolbox = document.getElementById('toolbox');
+    Blockly.inject(document.getElementById('content_blocks'),
+        {grid:
+            {spacing: 25,
+             length: 0,
+             colour: '#fff',
+             snap: true},
+         media: '../Blockly/media/',
+         toolbox: toolbox}); //Tree structure of categories and blocks available to the user.
+
+    auto_save_and_restore_blocks();
+
+
+     // Show the selected pane.
+     document.getElementById('content_blocks').style.visibility = 'visible';
+
+     renderContent();
+     Blockly.mainWorkspace.setVisible(true);
+     Blockly.fireUiEvent(window, 'resize');  }
+
 /**
  * Backup code blocks to localStorage.
  */
@@ -34,11 +117,10 @@ function auto_save_and_restore_blocks() {
   window.setTimeout(restore_blocks, 0);
   // Hook a save function onto unload.
   bindEvent(window, 'unload', backup_blocks);
-  tabClick(selected);
 
   // Init load event.
   var loadInput = document.getElementById('load');
-  loadInput.addEventListener('change', load, false);
+  //loadInput.addEventListener('change', load, false);
 }
 
 /**
@@ -125,4 +207,22 @@ function uploadClick() {
     });
 
     cmd.run('./upload.sh');
+}
+
+function addMotionSensor() {
+    var parser = new DOMParser();
+
+    var newNode = "<block type=\"motion_intensity\"></block>";
+    var xmlNode = parser.parseFromString(newNode, "text/xml");
+
+    toolbox.getElementsByTagName("category")[0].appendChild(xmlNode.childNodes[0]);
+
+    Blockly.inject(document.getElementById('content_blocks'),
+        {grid:
+            {spacing: 25,
+             length: 0,
+             colour: '#fff',
+             snap: true},
+         media: '../Blockly/media/',
+         toolbox: toolbox}); //Tree structure of categories and blocks available to the user.
 }
