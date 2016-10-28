@@ -41,6 +41,8 @@ const cmd = require('node-cmd');
     };
   }
 
+  var workspace;
+
   /**
    * Initialize Blockly.  Called on page load.
    */
@@ -68,7 +70,7 @@ const cmd = require('node-cmd');
     window.addEventListener('resize', onresize, false);
 
     var toolbox = document.getElementById('toolbox');
-    Blockly.inject(document.getElementById('content_blocks'),
+    workspace = Blockly.inject(document.getElementById('content_blocks'),
         {grid:
             {spacing: 25,
              length: 0,
@@ -77,15 +79,21 @@ const cmd = require('node-cmd');
          media: '../Blockly/media/',
          toolbox: toolbox}); //Tree structure of categories and blocks available to the user.
 
-    auto_save_and_restore_blocks();
+    Blockly.mainWorkspace.addChangeListener(onAddedMWBlocks);
 
+    auto_save_and_restore_blocks();
 
      // Show the selected pane.
      document.getElementById('content_blocks').style.visibility = 'visible';
 
      renderContent();
+
+
+
      Blockly.mainWorkspace.setVisible(true);
-     Blockly.fireUiEvent(window, 'resize');  }
+
+     Blockly.fireUiEvent(window, 'resize');
+ }
 
 /**
  * Backup code blocks to localStorage.
@@ -209,6 +217,8 @@ function uploadClick() {
     cmd.run('./upload.sh');
 }
 
+///Majeed Oct 28th: added a function to add a new block to the toolbox
+
 function addMotionSensor() {
     var parser = new DOMParser();
 
@@ -216,13 +226,16 @@ function addMotionSensor() {
     var xmlNode = parser.parseFromString(newNode, "text/xml");
 
     toolbox.getElementsByTagName("category")[0].appendChild(xmlNode.childNodes[0]);
-
-    Blockly.inject(document.getElementById('content_blocks'),
-        {grid:
-            {spacing: 25,
-             length: 0,
-             colour: '#fff',
-             snap: true},
-         media: '../Blockly/media/',
-         toolbox: toolbox}); //Tree structure of categories and blocks available to the user.
+    Blockly.getMainWorkspace().updateToolbox(toolbox);
 }
+
+///Majeed Oct 28th: added an event listener to see what block has been added to the workspace
+function onAddedMWBlocks(event) {
+    if(event.type == "create")
+    {
+        console.log(event.xml);
+    }
+}
+
+var inputs_used = 0;
+var outputs_used = 0;
