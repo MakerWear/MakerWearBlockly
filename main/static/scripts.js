@@ -53,7 +53,7 @@ const cmd = require('node-cmd');
 
     var container = document.getElementById('content_area');
 
-    var onresize = function(e) {
+    // var onresize = function(e) {
       var bBox = getBBox_(container);
 
     var el = document.getElementById('content_blocks');
@@ -66,8 +66,8 @@ const cmd = require('node-cmd');
     el.style.width = bBox.width + 'px';
     el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
 
-    };
-    window.addEventListener('resize', onresize, false);
+    // };
+    // window.addEventListener('resize', onresize, false);
 
     var toolbox = document.getElementById('toolbox');
     workspace = Blockly.inject(document.getElementById('content_blocks'),
@@ -92,7 +92,7 @@ const cmd = require('node-cmd');
 
      Blockly.mainWorkspace.setVisible(true);
 
-     Blockly.fireUiEvent(window, 'resize');
+    //  Blockly.fireUiEvent(window, 'resize');
  }
 
 /**
