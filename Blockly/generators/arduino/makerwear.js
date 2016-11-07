@@ -30,14 +30,14 @@ goog.provide('Blockly.Arduino.makerwear');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino['read_input'] = function(block) {
+Blockly.Arduino['mw_read_input'] = function(block) {
   var dropdown_adc_channel = block.getFieldValue('adc_channel');
   var code = 'analogRead('+dropdown_adc_channel+')';
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino['write_output'] = function(block) {
+Blockly.Arduino['mw_write_output'] = function(block) {
   var pwm_value = Blockly.Arduino.valueToCode(block, 'pwm_value', Blockly.Arduino.ORDER_ATOMIC);
   var dropdown_pwm_channel = block.getFieldValue('pwm_channel');
 
@@ -48,7 +48,7 @@ Blockly.Arduino['write_output'] = function(block) {
 //MakerWear Specific Modules
 //Sensors
 
-Blockly.Arduino['motion_intensity'] = function(block) {
+Blockly.Arduino['mw_motion_detector'] = function(block) {
   var dropdown_input_number = block.getFieldValue('input_number');
   var code = 'analogRead('+dropdown_input_number+')';
 

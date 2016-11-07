@@ -31,7 +31,7 @@ goog.provide('Blockly.Blocks.makerwear');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks['read_input'] = {
+Blockly.Blocks['mw_read_input'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("read input")
@@ -42,7 +42,7 @@ Blockly.Blocks['read_input'] = {
   }
 };
 
-Blockly.Blocks['write_output'] = {
+Blockly.Blocks['mw_write_output'] = {
   init: function() {
     this.appendValueInput("pwm_value")
         .setCheck("Number")
@@ -60,18 +60,204 @@ Blockly.Blocks['write_output'] = {
 
 //MakerWear Specific Modules
 //Sensors
-
-Blockly.Blocks['motion_intensity'] = {
+Blockly.Blocks['mw_button'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("motion intensity")
-        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
-    this.setOutput(true, null);
+        .appendField(new Blockly.FieldImage("icons/Sensor/Button.png", 35, 35, "*"))
+        .appendField("button")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number")
+        .appendField("pressed");
+    this.setOutput(true, ["Boolean", "Number"]);
     this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
   }
 };
 
+Blockly.Blocks['mw_impact_sensor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/ImpactSensor.png", 35, 35, "*"))
+        .appendField("impact")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number")
+        .appendField("detected?");
+    this.setOutput(true, ["Boolean", "Number"]);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['mw_tilt_sensor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/TiltSensor.png", 35, 35, "*"))
+        .appendField("is sensor")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number")
+        .appendField("tilted?");
+    this.setOutput(true, ["Boolean", "Number"]);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['mw_distance_sensor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/DistanceSensor.png", 35, 35, "*"))
+        .appendField("sensed distance")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_motion_detector'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/MotionDetector.png", 35, 35, "*"))
+        .appendField("motion intensity")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_receiver'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/Receiver.png", 35, 35, "*"))
+        .appendField("received value")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_heart_beat'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/HeartBeatDetector.png", 35, 35, "*"))
+        .appendField("detect heartbeat")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_color_detector'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/ColorDetector.png", 35, 35, "*"))
+        .appendField("color detected")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Color");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_light_sensor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/LightSensor.png", 35, 35, "*"))
+        .appendField("light intensity")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_temperature'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/TemperatureSensor.png", 35, 35, "*"))
+        .appendField("sensed temperature")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_sound_sensor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/SoundSensor.png", 35, 35, "*"))
+        .appendField("sensed sound")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+Blockly.Blocks['mw_sunlight_detector'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/SunLightDetector.png", 35, 35, "*"))
+        .appendField("sunlight detected")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+
+Blockly.Blocks['mw_sunlight_detector'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/SunLightDetector.png", 35, 35, "*"))
+        .appendField("sunlight detected")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+  }
+};
+
+
+Blockly.Blocks['mw_sensor'] = {
+  init: function() {
+      var PROPERTIES =
+          [['Motion Detector', 'MotionDetector'],
+           ['Sound Sensor', 'SoundSensor']];
+
+    var thisBlock = this;
+    var img = "MotionDetector";
+
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("icons/Sensor/" + img + ".png", 35, 35, "*"))
+        .appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
+            thisBlock.updateShape_(option);}))
+        .appendField("sunlight detected")
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+    this.setOutput(true, "Number");
+    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+    },
+    updateShape_: function(option) {
+        // this.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"));
+        console.log(option);
+        img = option;
+    }
+    // /**
+    // * Create XML to represent the output type.
+    // * @return {Element} XML storage element.
+    // * @this Blockly.Block
+    // */
+    // mutationToDom: function() {
+    //     var container = document.createElement('mutation');
+    //     container.setAttribute('op', this.getFieldValue('OP'));
+    //     return container;
+    // },
+    // /**
+    // * Parse XML to restore the output type.
+    // * @param {!Element} xmlElement XML storage element.
+    // * @this Blockly.Block
+    // */
+    // domToMutation: function(xmlElement) {
+    //     this.updateType_(xmlElement.getAttribute('op'));
+    // }
+};
+
+
 //Actions
+
+
 //Modifiers
 //Power
 //Misc

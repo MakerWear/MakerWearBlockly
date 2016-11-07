@@ -231,11 +231,10 @@ function addMotionSensor() {
 
 ///Majeed Oct 28th: added an event listener to see what block has been added to the workspace
 function onAddedMWBlocks(event) {
-    if(event.type == "create")
-    {
-        console.log(event.xml);
+    if(event.type == Blockly.Events.CREATE) {
+        console.log(event.xml.getAttribute("type"));
     }
 }
 
-var inputs_used = 0;
-var outputs_used = 0;
+var inputs = [0, 0, 0];
+var outputs = [0, 0, 0];
