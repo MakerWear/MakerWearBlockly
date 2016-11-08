@@ -50,29 +50,19 @@
 
   <xml id="toolbox" style="display: none">
     <category name="MakerWear" colour="270">
-        <category name="Common">
-            <block type="mw_read_input"></block>
-            <block type="mw_write_output"></block>
-        </category>
-        <category name="Sensors">
-          <block type="mw_sensor"></block>
-            <block type="mw_motion_detector"></block>
-            <block type="mw_button"></block>
-            <block type="mw_impact_sensor"></block>
-            <block type="mw_tilt_sensor"></block>
-            <block type="mw_distance_sensor"></block>
-            <block type="mw_motion_detector"></block>
-            <block type="mw_receiver"></block>
-            <block type="mw_heart_beat"></block>
-            <block type="mw_color_detector"></block>
-            <block type="mw_light_sensor"></block>
-            <block type="mw_temperature"></block>
-            <block type="mw_sound_sensor"></block>
-            <block type="mw_sunlight_detector"></block>
+      <block type="mw_read_input"></block>
+      <sep gap="10"></sep>
+      <block type="mw_write_output"></block>
 
-        </category>
+      <sep gap="35"></sep>
+      <block type="mw_sense_movement"></block>
+      <sep gap="10"></sep>
+      <block type="mw_sense_environment"></block>
+      <sep gap="10"></sep>
+      <block type="mw_sense_physiology"></block>
+      <sep gap="35"></sep>
 
-        <!-- <block type="motion_intensity"></block> -->
+
     </category>
     <category name="Logic" colour="210">
       <block type="controls_if"></block>
