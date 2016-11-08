@@ -37,29 +37,41 @@ goog.require('Blockly.Blocks');
 //general block to analog read from an input
 Blockly.Blocks['mw_read_input'] = {
   init: function() {
+    var thisBlock = this;
+    
     this.appendDummyInput()
         .appendField("read input")
-        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "adc_channel");
+        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
+            thisBlock.updatePosition(option);}), "adc_channel");
     this.setOutput(true, null);
     this.setColour(320);
     this.setTooltip('TODO');
+  },
+  updatePosition: function(option) {
+    console.log(option);
   }
 };
 
 //general block to analog write into a output
 Blockly.Blocks['mw_write_output'] = {
   init: function() {
+    var thisBlock = this;
+
     this.appendValueInput("pwm_value")
         .setCheck("Number")
         .appendField("write");
     this.appendDummyInput()
         .appendField("to output")
-        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]]), "pwm_channel");
+        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
+            thisBlock.updatePosition(option);}), "pwm_channel");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(180);
     this.setTooltip('TODO');
+  },
+  updatePosition: function(option) {
+    console.log(option);
   }
 };
 
@@ -78,15 +90,16 @@ Blockly.Blocks['mw_sense_movement'] = {
     var fieldGroup = this.appendDummyInput();
         fieldGroup.appendField(new Blockly.FieldImage("icons/Sensor/TiltSensor.png", 35, 35, "*"), "icon");
         fieldGroup.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            thisBlock.updateShape_(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
+            thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
         fieldGroup.appendField("sensor value", "text");
-        fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+        fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
+            thisBlock.updatePosition(option);}), "input_number");
 
     this.setOutput(true, "Number");
     this.setTooltip('TODO.');
     this.setColour(320);
     },
-    updateShape_: function(option, field, block, PROPERTIES) {
+    updateShape: function(option, field, block, PROPERTIES) {
         // console.log(option);
 
         //store current values of the DropDown menus
@@ -99,15 +112,19 @@ Blockly.Blocks['mw_sense_movement'] = {
 
         field.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"), "icon");
         field.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            block.updateShape_(option, field, block, PROPERTIES);}), "sensor_name");
+            block.updateShape(option, field, block, PROPERTIES);}), "sensor_name");
 
         //TODO: update the text based on the module
         field.appendField("sensor value", "text");
-        field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+        field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
+            block.updatePosition(option);}), "input_number");
 
         //set the values of the DropDown menus
         block.getField("sensor_name").setValue(option);
         block.getField("input_number").setValue(input_number);
+    },
+    updatePosition: function(option) {
+      console.log(option);
     }
 };
 
@@ -127,15 +144,16 @@ Blockly.Blocks['mw_sense_environment'] = {
     var fieldGroup = this.appendDummyInput();
         fieldGroup.appendField(new Blockly.FieldImage("icons/Sensor/LightSensor.png", 35, 35, "*"), "icon");
         fieldGroup.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            thisBlock.updateShape_(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
+            thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
         fieldGroup.appendField("sensor value", "text");
-        fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+        fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
+            thisBlock.updatePosition(option);}), "input_number");
 
     this.setOutput(true, "Number");
     this.setTooltip('TODO');
     this.setColour(320);
     },
-    updateShape_: function(option, field, block, PROPERTIES) {
+    updateShape: function(option, field, block, PROPERTIES) {
         // console.log(option);
 
         //store current values of the DropDown menus
@@ -148,15 +166,19 @@ Blockly.Blocks['mw_sense_environment'] = {
 
         field.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"), "icon");
         field.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            block.updateShape_(option, field, block, PROPERTIES);}), "sensor_name");
+            block.updateShape(option, field, block, PROPERTIES);}), "sensor_name");
 
         //TODO: update the text based on the module
         field.appendField("sensor value", "text");
-        field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+        field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
+            block.updatePosition(option);}), "input_number");
 
         //set the values of the DropDown menus
         block.getField("sensor_name").setValue(option);
         block.getField("input_number").setValue(input_number);
+    },
+    updatePosition: function(option) {
+      console.log(option);
     }
 };
 
@@ -172,15 +194,16 @@ Blockly.Blocks['mw_sense_physiology'] = {
     var fieldGroup = this.appendDummyInput();
         fieldGroup.appendField(new Blockly.FieldImage("icons/Sensor/HeartBeatDetector.png", 35, 35, "*"), "icon");
         fieldGroup.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            thisBlock.updateShape_(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
+            thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
         fieldGroup.appendField("sensor value", "text");
-        fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+        fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
+            thisBlock.updatePosition(option);}), "input_number");
 
     this.setOutput(true, "Number");
     this.setTooltip('TODO');
     this.setColour(320);
     },
-    updateShape_: function(option, field, block, PROPERTIES) {
+    updateShape: function(option, field, block, PROPERTIES) {
         // console.log(option);
 
         //store current values of the DropDown menus
@@ -193,15 +216,19 @@ Blockly.Blocks['mw_sense_physiology'] = {
 
         field.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"), "icon");
         field.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            block.updateShape_(option, field, block, PROPERTIES);}), "sensor_name");
+            block.updateShape(option, field, block, PROPERTIES);}), "sensor_name");
 
         //TODO: update the text based on the module
         field.appendField("sensor value", "text");
-        field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+        field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
+            block.updatePosition(option);}), "input_number");
 
         //set the values of the DropDown menus
         block.getField("sensor_name").setValue(option);
         block.getField("input_number").setValue(input_number);
+    },
+    updatePosition: function(option) {
+      console.log(option);
     }
 };
 
@@ -219,7 +246,7 @@ Blockly.Blocks['mw_action_actuator'] = {
     var fieldGroup = this.appendDummyInput();
         fieldGroup.appendField(new Blockly.FieldImage("icons/Action/Spinner.png", 35, 35, "*"), "icon");
         fieldGroup.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            thisBlock.updateShape_(option, fieldGroup, thisBlock, PROPERTIES);}), "action_name");
+            thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "action_name");
 
     this.appendValueInput("pwm_value")
         .setCheck("Number")
@@ -227,7 +254,8 @@ Blockly.Blocks['mw_action_actuator'] = {
 
     this.appendDummyInput()
         .appendField("to output")
-        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]]), "output_number");
+        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
+            thisBlock.updatePosition(option);}), "output_number");
 
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -235,7 +263,7 @@ Blockly.Blocks['mw_action_actuator'] = {
     this.setColour(180);
     this.setTooltip('TODO');
     },
-    updateShape_: function(option, field, block, PROPERTIES) {
+    updateShape: function(option, field, block, PROPERTIES) {
         console.log(option);
 
         //store current values of the DropDown menus
@@ -246,10 +274,13 @@ Blockly.Blocks['mw_action_actuator'] = {
 
         field.appendField(new Blockly.FieldImage("icons/Action/" + option + ".png", 35, 35, "*"), "icon");
         field.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            block.updateShape_(option, field, block, PROPERTIES);}), "action_name");
+            block.updateShape(option, field, block, PROPERTIES);}), "action_name");
 
         //set the values of the DropDown menus
         block.getField("action_name").setValue(option);
+    },
+    updatePosition: function(option) {
+      console.log(option);
     }
 };
 
@@ -268,7 +299,7 @@ Blockly.Blocks['mw_action_display'] = {
     var fieldGroup = this.appendDummyInput();
         fieldGroup.appendField(new Blockly.FieldImage("icons/Action/Light.png", 35, 35, "*"), "icon");
         fieldGroup.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            thisBlock.updateShape_(option, fieldGroup, thisBlock, PROPERTIES);}), "action_name");
+            thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "action_name");
 
     this.appendValueInput("pwm_value")
         .setCheck("Number")
@@ -276,7 +307,8 @@ Blockly.Blocks['mw_action_display'] = {
 
     this.appendDummyInput()
         .appendField("to output")
-        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]]), "output_number");
+        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
+            thisBlock.updatePosition(option);}), "output_number");
 
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -284,7 +316,7 @@ Blockly.Blocks['mw_action_display'] = {
     this.setColour(180);
     this.setTooltip('TODO');
     },
-    updateShape_: function(option, field, block, PROPERTIES) {
+    updateShape: function(option, field, block, PROPERTIES) {
         console.log(option);
 
         //store current values of the DropDown menus
@@ -295,10 +327,13 @@ Blockly.Blocks['mw_action_display'] = {
 
         field.appendField(new Blockly.FieldImage("icons/Action/" + option + ".png", 35, 35, "*"), "icon");
         field.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            block.updateShape_(option, field, block, PROPERTIES);}), "action_name");
+            block.updateShape(option, field, block, PROPERTIES);}), "action_name");
 
         //set the values of the DropDown menus
         block.getField("action_name").setValue(option);
+    },
+    updatePosition: function(option) {
+      console.log(option);
     }
 };
 
@@ -314,7 +349,7 @@ Blockly.Blocks['mw_action_sound'] = {
     var fieldGroup = this.appendDummyInput();
         fieldGroup.appendField(new Blockly.FieldImage("icons/Action/SoundMaker.png", 35, 35, "*"), "icon");
         fieldGroup.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            thisBlock.updateShape_(option, fieldGroup, thisBlock, PROPERTIES);}), "action_name");
+            thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "action_name");
 
     this.appendValueInput("pwm_value")
         .setCheck("Number")
@@ -322,7 +357,8 @@ Blockly.Blocks['mw_action_sound'] = {
 
     this.appendDummyInput()
         .appendField("to output")
-        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]]), "output_number");
+        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
+            thisBlock.updatePosition(option);}), "output_number");
 
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -330,7 +366,7 @@ Blockly.Blocks['mw_action_sound'] = {
     this.setColour(180);
     this.setTooltip('TODO');
     },
-    updateShape_: function(option, field, block, PROPERTIES) {
+    updateShape: function(option, field, block, PROPERTIES) {
         console.log(option);
 
         //store current values of the DropDown menus
@@ -341,9 +377,12 @@ Blockly.Blocks['mw_action_sound'] = {
 
         field.appendField(new Blockly.FieldImage("icons/Action/" + option + ".png", 35, 35, "*"), "icon");
         field.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            block.updateShape_(option, field, block, PROPERTIES);}), "action_name");
+            block.updateShape(option, field, block, PROPERTIES);}), "action_name");
 
         //set the values of the DropDown menus
         block.getField("action_name").setValue(option);
+    },
+    updatePosition: function(option) {
+      console.log(option);
     }
 };
