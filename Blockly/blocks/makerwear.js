@@ -210,30 +210,83 @@ Blockly.Blocks['mw_sunlight_detector'] = {
   }
 };
 
+//
+// Blockly.Blocks['mw_sensor'] = {
+//   init: function() {
+//       var PROPERTIES =
+//           [['Motion Detector', 'MotionDetector'],
+//            ['Sound Sensor', 'SoundSensor']];
+//
+//     var thisBlock = this;
+//     var img = "MotionDetector";
+//
+//     var x = this.appendDummyInput();
+//         x.appendField(new Blockly.FieldImage("icons/Sensor/" + img + ".png", 35, 35, "*"), "icon");
+//
+//     this.appendDummyInput()
+//         .appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
+//             thisBlock.updateShape_(option, x);}))
+//         .appendField("sunlight detected")
+//         .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+//     this.setOutput(true, "Number");
+//     this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+//     },
+//     updateShape_: function(option, field) {
+//         // this.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"));
+//         console.log(option);
+//         // childBlock = null;
+//         // childBlock = parentBlock.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"));
+//
+//         field.removeField("icon");
+//         field.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"), "icon");
+//     }
+//
 
-Blockly.Blocks['mw_sensor'] = {
-  init: function() {
-      var PROPERTIES =
-          [['Motion Detector', 'MotionDetector'],
-           ['Sound Sensor', 'SoundSensor']];
+//v2
+  Blockly.Blocks['mw_sensor'] = {
+    init: function() {
+        var PROPERTIES =
+            [['Motion Detector', 'MotionDetector'],
+             ['Sound Sensor', 'SoundSensor']];
 
-    var thisBlock = this;
-    var img = "MotionDetector";
+      var thisBlock = this;
 
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("icons/Sensor/" + img + ".png", 35, 35, "*"))
-        .appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
-            thisBlock.updateShape_(option);}))
-        .appendField("sunlight detected")
-        .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
-    this.setOutput(true, "Number");
-    this.setTooltip('motion intensity read from the Motion Detector sensor module.');
-    },
-    updateShape_: function(option) {
-        // this.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"));
-        console.log(option);
-        img = option;
-    }
+      var dummy = this.appendDummyInput();
+          dummy.appendField(new Blockly.FieldImage("icons/Sensor/MotionDetector.png", 35, 35, "*"), "icon");
+          dummy.appendField(new Blockly.FieldDropdown(PROPERTIES, function(option) {
+              inputNumber = thisBlock.getFieldValue("input_number");
+              thisBlock.updateShape_(option, dummy, PROPERTIES, thisBlock, inputNumber);}), "sensor_name");
+          dummy.appendField("sunlight detected", "text");
+          dummy.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+
+      this.setOutput(true, "Number");
+      this.setTooltip('motion intensity read from the Motion Detector sensor module.');
+      },
+      updateShape_: function(option, field, p, b, inpNum) {
+          // this.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"));
+          console.log(option);
+          // childBlock = null;
+          // childBlock = parentBlock.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"));
+
+          var inp = b.getField("input_number").getValue();
+
+          field.removeField("icon");
+          field.removeField("sensor_name");
+          field.removeField("text");
+          field.removeField("input_number");
+
+          field.appendField(new Blockly.FieldImage("icons/Sensor/" + option + ".png", 35, 35, "*"), "icon");
+          var sensor_name = field.appendField(new Blockly.FieldDropdown(p, function(option) {
+              b.updateShape_(option, field, p, b);}), "sensor_name");
+          //sensor_name.setFieldValue(option);
+          field.appendField("sunlight detected", "text");
+          var input_number = field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]]), "input_number");
+          //input_number.setFieldValue(inpNum);
+          b.getField("sensor_name").setValue(option);
+          b.getField("input_number").setValue(inp);
+
+      }
+
     // /**
     // * Create XML to represent the output type.
     // * @return {Element} XML storage element.
