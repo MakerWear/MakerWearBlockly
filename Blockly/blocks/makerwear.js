@@ -38,7 +38,7 @@ goog.require('Blockly.Blocks');
 Blockly.Blocks['mw_read_input'] = {
   init: function() {
     var thisBlock = this;
-    
+
     this.appendDummyInput()
         .appendField("read input")
         .appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
@@ -75,6 +75,8 @@ Blockly.Blocks['mw_write_output'] = {
   }
 };
 
+
+
 //specific block for sensing movement inputs
 Blockly.Blocks['mw_sense_movement'] = {
   init: function() {
@@ -93,7 +95,7 @@ Blockly.Blocks['mw_sense_movement'] = {
             thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
         fieldGroup.appendField("sensor value", "text");
         fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
-            thisBlock.updatePosition(option);}), "input_number");
+            thisBlock.updatePosition(option, thisBlock);}), "input_number");
 
     this.setOutput(true, "Number");
     this.setTooltip('TODO.');
@@ -117,14 +119,22 @@ Blockly.Blocks['mw_sense_movement'] = {
         //TODO: update the text based on the module
         field.appendField("sensor value", "text");
         field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
-            block.updatePosition(option);}), "input_number");
+            block.updatePosition(option, block);}), "input_number");
 
         //set the values of the DropDown menus
         block.getField("sensor_name").setValue(option);
         block.getField("input_number").setValue(input_number);
+
+        checkInputToClear(input_number);
+        checkInputToSet(input_number, option);
     },
-    updatePosition: function(option) {
-      console.log(option);
+    updatePosition: function(option, block) {
+      // console.log(option);
+      var blockName = block.getField("sensor_name").getValue();
+      var prevPort = block.getField("input_number").getValue();
+
+      checkInputToClear(prevPort);
+      checkInputToSet(option, blockName);
     }
 };
 
@@ -147,7 +157,7 @@ Blockly.Blocks['mw_sense_environment'] = {
             thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
         fieldGroup.appendField("sensor value", "text");
         fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
-            thisBlock.updatePosition(option);}), "input_number");
+            thisBlock.updatePosition(option, thisBlock);}), "input_number");
 
     this.setOutput(true, "Number");
     this.setTooltip('TODO');
@@ -171,14 +181,23 @@ Blockly.Blocks['mw_sense_environment'] = {
         //TODO: update the text based on the module
         field.appendField("sensor value", "text");
         field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
-            block.updatePosition(option);}), "input_number");
+            block.updatePosition(option, block);}), "input_number");
 
         //set the values of the DropDown menus
         block.getField("sensor_name").setValue(option);
         block.getField("input_number").setValue(input_number);
+
+        checkInputToClear(input_number);
+        checkInputToSet(input_number, option);
     },
-    updatePosition: function(option) {
-      console.log(option);
+    updatePosition: function(option, block) {
+      // console.log(option);
+
+      var blockName = block.getField("sensor_name").getValue();
+      var prevPort = block.getField("input_number").getValue();
+
+      checkInputToClear(prevPort);
+      checkInputToSet(option, blockName);
     }
 };
 
@@ -197,7 +216,7 @@ Blockly.Blocks['mw_sense_physiology'] = {
             thisBlock.updateShape(option, fieldGroup, thisBlock, PROPERTIES);}), "sensor_name");
         fieldGroup.appendField("sensor value", "text");
         fieldGroup.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
-            thisBlock.updatePosition(option);}), "input_number");
+            thisBlock.updatePosition(option, thisBlock);}), "input_number");
 
     this.setOutput(true, "Number");
     this.setTooltip('TODO');
@@ -221,14 +240,22 @@ Blockly.Blocks['mw_sense_physiology'] = {
         //TODO: update the text based on the module
         field.appendField("sensor value", "text");
         field.appendField(new Blockly.FieldDropdown([["1", "A0"], ["2", "A1"], ["3", "A2"]], function(option) {
-            block.updatePosition(option);}), "input_number");
+            block.updatePosition(option, block);}), "input_number");
 
         //set the values of the DropDown menus
         block.getField("sensor_name").setValue(option);
         block.getField("input_number").setValue(input_number);
+
+        checkInputToClear(input_number);
+        checkInputToSet(input_number, option);
     },
-    updatePosition: function(option) {
-      console.log(option);
+    updatePosition: function(option, block) {
+      // console.log(option);
+      var blockName = block.getField("sensor_name").getValue();
+      var prevPort = block.getField("input_number").getValue();
+
+      checkInputToClear(prevPort);
+      checkInputToSet(option, blockName);
     }
 };
 
@@ -255,7 +282,7 @@ Blockly.Blocks['mw_action_actuator'] = {
     this.appendDummyInput()
         .appendField("to output")
         .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
-            thisBlock.updatePosition(option);}), "output_number");
+            thisBlock.updatePosition(option, thisBlock);}), "output_number");
 
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -264,7 +291,7 @@ Blockly.Blocks['mw_action_actuator'] = {
     this.setTooltip('TODO');
     },
     updateShape: function(option, field, block, PROPERTIES) {
-        console.log(option);
+        // console.log(option);
 
         //store current values of the DropDown menus
         var output_number = block.getField("output_number").getValue();
@@ -278,9 +305,18 @@ Blockly.Blocks['mw_action_actuator'] = {
 
         //set the values of the DropDown menus
         block.getField("action_name").setValue(option);
+
+        checkOutputToClear(output_number);
+        checkOutputToSet(output_number, option);
     },
-    updatePosition: function(option) {
-      console.log(option);
+    updatePosition: function(option, block) {
+      // console.log(option);
+
+      var blockName = block.getField("action_name").getValue();
+      var prevPort = block.getField("output_number").getValue();
+
+      checkOutputToClear(prevPort);
+      checkOutputToSet(option, blockName);
     }
 };
 
@@ -308,7 +344,7 @@ Blockly.Blocks['mw_action_display'] = {
     this.appendDummyInput()
         .appendField("to output")
         .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
-            thisBlock.updatePosition(option);}), "output_number");
+            thisBlock.updatePosition(option, thisBlock);}), "output_number");
 
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -317,7 +353,7 @@ Blockly.Blocks['mw_action_display'] = {
     this.setTooltip('TODO');
     },
     updateShape: function(option, field, block, PROPERTIES) {
-        console.log(option);
+        // console.log(option);
 
         //store current values of the DropDown menus
         var output_number = block.getField("output_number").getValue();
@@ -331,9 +367,18 @@ Blockly.Blocks['mw_action_display'] = {
 
         //set the values of the DropDown menus
         block.getField("action_name").setValue(option);
+
+        checkOutputToClear(output_number);
+        checkOutputToSet(output_number, option);
     },
-    updatePosition: function(option) {
-      console.log(option);
+    updatePosition: function(option, block) {
+      // console.log(option);
+
+      var blockName = block.getField("action_name").getValue();
+      var prevPort = block.getField("output_number").getValue();
+
+      checkOutputToClear(prevPort);
+      checkOutputToSet(option, blockName);
     }
 };
 
@@ -358,7 +403,7 @@ Blockly.Blocks['mw_action_sound'] = {
     this.appendDummyInput()
         .appendField("to output")
         .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
-            thisBlock.updatePosition(option);}), "output_number");
+            thisBlock.updatePosition(option, thisBlock);}), "output_number");
 
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -367,7 +412,7 @@ Blockly.Blocks['mw_action_sound'] = {
     this.setTooltip('TODO');
     },
     updateShape: function(option, field, block, PROPERTIES) {
-        console.log(option);
+        // console.log(option);
 
         //store current values of the DropDown menus
         var output_number = block.getField("output_number").getValue();
@@ -381,8 +426,17 @@ Blockly.Blocks['mw_action_sound'] = {
 
         //set the values of the DropDown menus
         block.getField("action_name").setValue(option);
+
+        checkOutputToClear(output_number);
+        checkOutputToSet(output_number, option);
     },
-    updatePosition: function(option) {
-      console.log(option);
+    updatePosition: function(option, block) {
+      // console.log(option);
+
+      var blockName = block.getField("action_name").getValue();
+      var prevPort = block.getField("output_number").getValue();
+
+      checkOutputToClear(prevPort);
+      checkOutputToSet(option, blockName);
     }
 };

@@ -14,4 +14,85 @@ body {
 
 #content_blocks {
   position: absolute;
+  float: left;
+}
+
+
+#makerwear_modules {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  margin-left: 30px;
+
+  float: left;
+
+  background-color: #fafafa;
+}
+
+button {
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 20px;
+
+  margin-left: 30px;
+  margin-top: 30px;
+
+}
+
+#makerwear_modules img {
+  position: absolute;
+}
+
+#mid_hex {
+  width: 100px;
+  top: 130px;
+  left: 130px;
+}
+
+#hex_in1 {
+  width: 100px;
+  top: 230px;
+  left: 130px;
+
+  transform: rotate(0deg);
+}
+
+#hex_in2 {
+  width: 100px;
+  top: 80px;
+  left: 215px;
+
+  transform: rotate(60deg);
+}
+
+#hex_in3 {
+  width: 100px;
+  top: 80px;
+  left: 45px;
+
+  transform: rotate(300deg);
+}
+
+#hex_out1 {
+  width: 100px;
+  top: 30px;
+  left: 130px;
+
+  transform: rotate(0deg);
+}
+
+#hex_out2 {
+  width: 100px;
+  top: 180px;
+  left: 45px;
+
+  transform: rotate(240deg);
+}
+
+#hex_out3 {
+  width: 100px;
+  top: 180px;
+  left: 215px;
+
+  transform: rotate(120deg);
 }

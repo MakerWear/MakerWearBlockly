@@ -3,6 +3,9 @@ const sys = require('util')
 const exec = require('child_process').exec;
 const cmd = require('node-cmd');
 
+var inputs;
+var outputs;
+
 
   /**
    * Populate the currently selected pane with content generated from the blocks.
@@ -50,6 +53,10 @@ const cmd = require('node-cmd');
     //window.onbeforeunload = function() {
     //  return 'Leaving this page will result in the loss of your work.';
     //};
+
+    inputs = [0, 0, 0];
+    outputs = [0, 0, 0];
+
 
     var container = document.getElementById('content_area');
 
@@ -236,36 +243,148 @@ function onAddedMWBlocks(event) {
 
         if(blockType.indexOf("mw_sense") >= 0) //if contains string
         {
-          if(event.xml.children[1].childNodes[0] == "A0")
-          {
+          blockName = event.xml.children[0].childNodes[0].textContent;
+          blockPosition = event.xml.children[1].childNodes[0].textContent;
 
-          }
-          else if(event.xml.children[1].childNodes[0] == "A1")
-          {
-
-          }
-          else if(event.xml.children[1].childNodes[0] == "A2")
-          {
-
-          }
+          checkInputToSet(blockPosition, blockName);
         }
-        if(blockType.indexOf("mw_action") >= 0) //if contains string
+        else if(blockType.indexOf("mw_action") >= 0) //if contains string
         {
-          if(event.xml.children[1].childNodes[0] == "1")
-          {
+          blockName = event.xml.children[0].childNodes[0].textContent;
+          blockPosition = event.xml.children[1].childNodes[0].textContent;
 
-          }
-          else if(event.xml.children[1].childNodes[0] == "2")
-          {
-
-          }
-          else if(event.xml.children[1].childNodes[0] == "3")
-          {
-
-          }
+          checkOutputToSet(blockPosition, blockName);
         }
+    }
+
+    if(event.type == Blockly.Events.DELETE) {
+      blockType = event.oldXml.getAttribute("type");
+
+      if(blockType.indexOf("mw_sense") >= 0) //if contains string
+      {
+        blockName = event.oldXml.children[0].childNodes[0].textContent;
+        blockPosition = event.oldXml.children[1].childNodes[0].textContent;
+
+        checkInputToClear(blockPosition);
+      }
+      else if(blockType.indexOf("mw_action") >= 0) //if contains string
+      {
+        blockName = event.oldXml.children[0].childNodes[0].textContent;
+        blockPosition = event.oldXml.children[1].childNodes[0].textContent;
+
+        checkOutputToClear(blockPosition);
+      }
     }
 }
 
-var inputs = [0, 0, 0];
-var outputs = [0, 0, 0];
+//helper functions
+function setInputHex(name, number) {
+   var image = document.getElementById("hex_in" + number);
+   image.setAttribute("src", "icons/Sensor/" + name + ".png");
+ }
+
+function setOutputHex(name, number) {
+  var image = document.getElementById("hex_out" + number);
+  image.setAttribute("src", "icons/Action/" + name + ".png");
+}
+
+function clearInput(number) {
+  var image = document.getElementById("hex_in" + number);
+  image.setAttribute("src", "icons/Connections/empty-hex.png");
+}
+
+function clearOutput(number) {
+  var image = document.getElementById("hex_out" + number);
+  image.setAttribute("src", "icons/Connections/empty-hex.png");
+}
+
+//helper functions
+function checkInputToSet(input_port, block_name) {
+  if(input_port == "A0")
+  {
+    if(inputs[0] == 0)
+    {
+      setInputHex(block_name, 1);
+      inputs[0] = 1;
+    }
+  }
+  else if(input_port == "A1")
+  {
+    if(inputs[1] == 0)
+    {
+      setInputHex(block_name, 2);
+      inputs[1] = 1;
+    }
+  }
+  else if(input_port == "A2")
+  {
+    if(inputs[2] == 0)
+    {
+      setInputHex(block_name, 3);
+      inputs[2] = 1;
+    }
+  }
+}
+
+function checkOutputToSet(output_port, block_name) {
+  if(output_port == "3")
+  {
+    if(outputs[0] == 0)
+    {
+      setOutputHex(block_name, 1);
+      outputs[0] = 1;
+    }
+  }
+  else if(output_port == "5")
+  {
+    if(outputs[1] == 0)
+    {
+      setOutputHex(block_name, 2);
+      outputs[1] = 1;
+    }
+  }
+  else if(output_port == "6")
+  {
+    if(outputs[2] == 0)
+    {
+      setOutputHex(block_name, 3);
+      outputs[2] = 1;
+    }
+  }
+}
+
+function checkInputToClear(input_port) {
+  if(input_port == "A0")
+  {
+      clearInput(1);
+      inputs[0] = 0;
+  }
+  else if(input_port == "A1")
+  {
+    clearInput(2);
+    inputs[1] = 0;
+  }
+  else if(input_port == "A2")
+  {
+    clearInput(3);
+    inputs[2] = 0;
+  }
+}
+
+function checkOutputToClear(output_port) {
+  if(output_port == "3")
+  {
+    clearOutput(1);
+    outputs[0] = 0;
+  }
+  else if(output_port == "5")
+  {
+    clearOutput(2);
+    outputs[1] = 0;
+  }
+  else if(output_port == "6")
+  {
+    clearOutput(3);
+    outputs[2] = 0;
+  }
+}

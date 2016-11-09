@@ -39,14 +39,29 @@
 </head>
 <body onload="init()">
     <h1> Visual Programming Editor for MakerWear</h1>
-    <button type="button" onclick="uploadClick()">Upload</button>
-  <table height="80%" width="70%">
+
+  <table height="80%" width="70%" style="float: left;">
+
       <tr>
       <td height="100%" id="content_area"></td>
     </tr>
+
   </table>
 
+  <div id="makerwear_modules">
+    <img id="mid_hex" src="icons/Connections/programmable.png">
+
+    <img id="hex_in1" src="icons/Connections/empty-hex.png">
+    <img id="hex_in2" src="icons/Connections/empty-hex.png">
+    <img id="hex_in3" src="icons/Connections/empty-hex.png">
+    <img id="hex_out1" src="icons/Connections/empty-hex.png">
+    <img id="hex_out2" src="icons/Connections/empty-hex.png">
+    <img id="hex_out3" src="icons/Connections/empty-hex.png">
+  </div>
+  <button type="button" onclick="uploadClick()" style="float: left;">Program</button>
+
   <div id="content_blocks"></div>
+
 
   <xml id="toolbox" style="display: none">
     <category name="MakerWear" colour="320">
