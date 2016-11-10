@@ -9,5 +9,19 @@ Currently using the following packages:
 - Arduino: https://github.com/Arduino/arduino
 - Electron: https://github.com/electron/electron
 
+requirements for running:
+
+Windows:
+- npm install -g electron
+- Arduino (we're using it's avr-dude, and ...)
+
+OS X:
+
+setting up upload.sh and the Makefile.
+
+
+requirements for development:
+
+
 Node Packages:
 - node-cmd
