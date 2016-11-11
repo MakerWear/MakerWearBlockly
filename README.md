@@ -1,7 +1,7 @@
 # MakerWearBlockly
 A visual programming interface based on [Blockly](https://developers.google.com/blockly/) that allows children to program their Programmable MakerWear modules to control other modules in a new way!
 
-## Running and uploading the generated code on Windows:
+## Running on Windows:
 
 0. install [node](https://nodejs.org/en/) (which comes with npm)
 1. globally install electron: `npm install -g electron`. you should be able to run the electron app at this point by navigating to the MakerWearBlockly folder in your command line and then running `npm start`.
@@ -16,12 +16,8 @@ A visual programming interface based on [Blockly](https://developers.google.com/
 8. open the [upload.bat](https://github.com/myjeeed/MakerWearBlockly/blob/master/upload.bat) file and change following:
   * `"C:\Program Files (x86)\Arduino\hardware\tools\avr\etc\avrdude.conf"` to the absolute path pointing to the `avrdude.conf` file.
   * change `-PCOM3` to `-PCOM#` (based on the serial port that is connected to the module that needs to be programmed.
+9. open the [scripts.js](https://github.com/myjeeed/MakerWearBlockly/blob/master/main/static/scripts.js), comment this line `cmd.run('./upload.sh');` and then uncomment this line: `cmd.get('upload.bat', function(data){ console.log('uploading:\n\n',data); });`
 
-OS X:
+This should get you started running the application, making the programs, compiling them and uploading them onto the Module.
 
-setting up upload.sh and the Makefile.
-
-
-Local Node packages:
-- node-cmd
-- 
+## Running on OS X:
