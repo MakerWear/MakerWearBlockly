@@ -218,10 +218,19 @@ function uploadClick() {
             return console.log(err);
         }
 
-        console.log("The file was saved!");
+        console.log("generated output.ino and saved");
     });
 
-    cmd.run('./upload.sh');
+    //on mac:
+    //cmd.run('./upload.sh');
+
+    //on windows:
+    cmd.get('upload.bat',
+      function(data){
+          console.log('uploading:\n\n',data);
+      }
+);
+
 }
 
 ///Majeed Oct 28th: added a function to add a new block to the toolbox
