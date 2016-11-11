@@ -62,7 +62,7 @@ Blockly.Blocks['mw_write_output'] = {
         .appendField("write");
     this.appendDummyInput()
         .appendField("to output")
-        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
+        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"], ["Built-in LED", "13"]], function(option) {
             thisBlock.updatePosition(option);}), "pwm_channel");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
