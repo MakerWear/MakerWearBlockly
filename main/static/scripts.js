@@ -229,7 +229,7 @@ function uploadClick() {
     //   function(data){
     //       console.log('uploading:\n\n',data);
     //   }
-);
+// );
 
 }
 
