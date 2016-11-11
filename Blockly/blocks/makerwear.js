@@ -62,7 +62,7 @@ Blockly.Blocks['mw_write_output'] = {
         .appendField("write");
     this.appendDummyInput()
         .appendField("to output")
-        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"], ["Built-in LED", "13"]], function(option) {
+        .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"], ["Arduino LED", "13"]], function(option) {
             thisBlock.updatePosition(option);}), "pwm_channel");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -74,8 +74,6 @@ Blockly.Blocks['mw_write_output'] = {
     console.log(option);
   }
 };
-
-
 
 //specific block for sensing movement inputs
 Blockly.Blocks['mw_sense_movement'] = {
@@ -137,7 +135,6 @@ Blockly.Blocks['mw_sense_movement'] = {
       checkInputToSet(option, blockName);
     }
 };
-
 
 //specific block for sensing environmental inputs
 Blockly.Blocks['mw_sense_environment'] = {
@@ -320,7 +317,7 @@ Blockly.Blocks['mw_action_actuator'] = {
     }
 };
 
-//specific block for action actuator output
+//specific block for action display output
 Blockly.Blocks['mw_action_display'] = {
   init: function() {
       var PROPERTIES =
@@ -382,7 +379,7 @@ Blockly.Blocks['mw_action_display'] = {
     }
 };
 
-//specific block for action actuator output
+//specific block for action sound output
 Blockly.Blocks['mw_action_sound'] = {
   init: function() {
       var PROPERTIES =
