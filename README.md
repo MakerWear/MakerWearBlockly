@@ -13,6 +13,7 @@ A visual programming interface based on [Blockly](https://developers.google.com/
   * create a symbolic link to your Arduino folder and then set `ARDUINO_DIR` to point to the Arduino folder's shortcut. **Make sure that you're using a relative path** and NOT an absolute path (e.g. /cygdrive/c/...)
   * `AVR_TOOLS_DIR` should point (using a relative path) to the symbolic link that you created and then **/hardware/tools/avr** after it.
   * `ARDMK_DIR` should point (using absolute path) to MakerWearBlockly/ArduinoMakefile
+  * `BOARD_TXT` should point (using absolute path) to the [bear minimum boards.txt](https://www.arduino.cc/en/Tutorial/ArduinoToBreadboard) file.
 8. open the [upload.bat](https://github.com/myjeeed/MakerWearBlockly/blob/master/upload.bat) file and change following:
   * `"C:\Program Files (x86)\Arduino\hardware\tools\avr\etc\avrdude.conf"` to the absolute path pointing to the `avrdude.conf` file.
   * change `-PCOM3` to `-PCOM#` (based on the serial port that is connected to the module that needs to be programmed.
