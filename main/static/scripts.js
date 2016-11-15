@@ -222,14 +222,14 @@ function uploadClick() {
     });
 
     //on mac:
-    cmd.run('./upload.sh');
+    //cmd.run('./upload.sh');
 
     //on windows:
-    // cmd.get('upload.bat',
-    //   function(data){
-    //       console.log('uploading:\n\n',data);
-    //   }
-// );
+    cmd.get('upload.bat',
+      function(data){
+          console.log('uploading:\n\n',data);
+      }
+    );
 
 }
 
