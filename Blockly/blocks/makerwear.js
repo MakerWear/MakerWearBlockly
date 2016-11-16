@@ -64,7 +64,7 @@ Blockly.Blocks['mw_write_output'] = {
         .appendField("to output")
         .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"], ["Arduino LED", "13"]], function(option) {
             thisBlock.updatePosition(option);}), "pwm_channel");
-    this.setInputsInline(true);
+    // this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(180);
@@ -281,7 +281,7 @@ Blockly.Blocks['mw_action_actuator'] = {
         .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
             thisBlock.updatePosition(option, thisBlock);}), "output_number");
 
-    this.setInputsInline(true);
+    // this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(180);
@@ -343,7 +343,7 @@ Blockly.Blocks['mw_action_display'] = {
         .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
             thisBlock.updatePosition(option, thisBlock);}), "output_number");
 
-    this.setInputsInline(true);
+    // this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(180);
@@ -402,7 +402,7 @@ Blockly.Blocks['mw_action_sound'] = {
         .appendField(new Blockly.FieldDropdown([["1", "3"], ["2", "5"], ["3", "6"]], function(option) {
             thisBlock.updatePosition(option, thisBlock);}), "output_number");
 
-    this.setInputsInline(true);
+    // this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(180);

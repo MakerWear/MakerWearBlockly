@@ -50,22 +50,38 @@ Blockly.Arduino.addReservedWords(
  * Order of operation ENUMs.
  *
  */
-Blockly.Arduino.ORDER_ATOMIC = 0;         // 0 "" ...
-Blockly.Arduino.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] .
-Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
-Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; // * / % ~/
-Blockly.Arduino.ORDER_ADDITIVE = 4;       // + -
-Blockly.Arduino.ORDER_SHIFT = 5;          // << >>
-Blockly.Arduino.ORDER_RELATIONAL = 6;     // is is! >= > <= <
-Blockly.Arduino.ORDER_EQUALITY = 7;       // == != === !==
-Blockly.Arduino.ORDER_BITWISE_AND = 8;    // &
-Blockly.Arduino.ORDER_BITWISE_XOR = 9;    // ^
-Blockly.Arduino.ORDER_BITWISE_OR = 10;    // |
-Blockly.Arduino.ORDER_LOGICAL_AND = 11;   // &&
-Blockly.Arduino.ORDER_LOGICAL_OR = 12;    // ||
-Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
-Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
-Blockly.Arduino.ORDER_NONE = 99;          // (...)
+ Blockly.Arduino.ORDER_ATOMIC = 0;           // 0 "" ...
+ Blockly.Arduino.ORDER_NEW = 1.1;            // new
+ Blockly.Arduino.ORDER_MEMBER = 1.2;         // . []
+ Blockly.Arduino.ORDER_FUNCTION_CALL = 2;    // ()
+ Blockly.Arduino.ORDER_INCREMENT = 3;        // ++
+ Blockly.Arduino.ORDER_DECREMENT = 3;        // --
+ Blockly.Arduino.ORDER_BITWISE_NOT = 4.1;    // ~
+ Blockly.Arduino.ORDER_UNARY_PLUS = 4.2;     // +
+ Blockly.Arduino.ORDER_UNARY_NEGATION = 4.3; // -
+ Blockly.Arduino.ORDER_LOGICAL_NOT = 4.4;    // !
+ Blockly.Arduino.ORDER_TYPEOF = 4.5;         // typeof
+ Blockly.Arduino.ORDER_VOID = 4.6;           // void
+ Blockly.Arduino.ORDER_DELETE = 4.7;         // delete
+ Blockly.Arduino.ORDER_DIVISION = 5.1;       // /
+ Blockly.Arduino.ORDER_MULTIPLICATION = 5.2; // *
+ Blockly.Arduino.ORDER_MODULUS = 5.3;        // %
+ Blockly.Arduino.ORDER_SUBTRACTION = 6.1;    // -
+ Blockly.Arduino.ORDER_ADDITION = 6.2;       // +
+ Blockly.Arduino.ORDER_BITWISE_SHIFT = 7;    // << >> >>>
+ Blockly.Arduino.ORDER_RELATIONAL = 8;       // < <= > >=
+ Blockly.Arduino.ORDER_IN = 8;               // in
+ Blockly.Arduino.ORDER_INSTANCEOF = 8;       // instanceof
+ Blockly.Arduino.ORDER_EQUALITY = 9;         // == != === !==
+ Blockly.Arduino.ORDER_BITWISE_AND = 10;     // &
+ Blockly.Arduino.ORDER_BITWISE_XOR = 11;     // ^
+ Blockly.Arduino.ORDER_BITWISE_OR = 12;      // |
+ Blockly.Arduino.ORDER_LOGICAL_AND = 13;     // &&
+ Blockly.Arduino.ORDER_LOGICAL_OR = 14;      // ||
+ Blockly.Arduino.ORDER_CONDITIONAL = 15;     // ?:
+ Blockly.Arduino.ORDER_ASSIGNMENT = 16;      // = += -= *= /= %= <<= >>= ...
+ Blockly.Arduino.ORDER_COMMA = 17;           // ,
+ Blockly.Arduino.ORDER_NONE = 99;            // (...)
 
 /*
  * Arduino Board profiles

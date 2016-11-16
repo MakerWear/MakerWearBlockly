@@ -258,7 +258,7 @@ Blockly.Variables.createVariable = function(workspace) {
  *     something illegal.
  */
 Blockly.Variables.promptName = function(promptText, defaultText) {
-  var newVar = window.prompt(promptText, defaultText);
+  var newVar = window.prompt("title", promptText, defaultText);
   // Merge runs of whitespace.  Strip leading and trailing whitespace.
   // Beyond this, all names are legal.
   if (newVar) {
