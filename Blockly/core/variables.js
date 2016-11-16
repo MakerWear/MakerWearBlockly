@@ -250,6 +250,8 @@ Blockly.Variables.createVariable = function(workspace) {
   return text;
 };
 
+var varCount = 1;
+
 /**
  * Prompt the user for a new variable name.
  * @param {string} promptText The string of the prompt.
@@ -258,7 +260,7 @@ Blockly.Variables.createVariable = function(workspace) {
  *     something illegal.
  */
 Blockly.Variables.promptName = function(promptText, defaultText) {
-  var newVar = window.prompt("title", promptText, defaultText);
+  var newVar = "var" + varCount++;
   // Merge runs of whitespace.  Strip leading and trailing whitespace.
   // Beyond this, all names are legal.
   if (newVar) {
