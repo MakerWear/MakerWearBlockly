@@ -241,6 +241,32 @@ function uploadClick() {
       baudRate: 9600
     });
 
+    var debugging = true;
+    curBlock = null;
+    prevBlock = null;
+
+    do {
+      port.on('data', function(data) {
+        if (data == "end") {
+          debugging = false;
+
+          if(prevBlock != null)
+            curBlock.removeSelect();
+        }
+        else {
+          curBlock = workspace.getBlockById(data);
+          curBlock.addSelect();
+
+          if(prevBlock != null)
+          {
+            prevBlock.removeSelect();
+          }
+
+          prevBlock = curBlock;
+        }
+      });
+    } while(debugging);
+
 }
 
 ///Majeed Oct 28th: added a function to add a new block to the toolbox
