@@ -48,9 +48,9 @@ Blockly.Arduino['controls_repeat_ext'] = function(block) {
   if (!repeats.match(/^\w+$/) && !Blockly.isNumber(repeats)) {
     var endVar = Blockly.Arduino.variableDB_.getDistinctName(
         'repeat_end', Blockly.Variables.NAME_TYPE);
-    code += 'var ' + endVar + ' = ' + repeats + ';\n';
+    code += 'int ' + endVar + ' = ' + repeats + ';\n';
   }
-  code += 'for (var ' + loopVar + ' = 0; ' +
+  code += 'for (int ' + loopVar + ' = 0; ' +
       loopVar + ' < ' + endVar + '; ' +
       loopVar + '++) {\n' +
       branch + '}\n';
@@ -108,7 +108,7 @@ Blockly.Arduino['controls_for'] = function(block) {
     if (!argument0.match(/^\w+$/) && !Blockly.isNumber(argument0)) {
       startVar = Blockly.Arduino.variableDB_.getDistinctName(
           variable0 + '_start', Blockly.Variables.NAME_TYPE);
-      code += 'var ' + startVar + ' = ' + argument0 + ';\n';
+      code += 'int ' + startVar + ' = ' + argument0 + ';\n';
     }
     var endVar = argument1;
     if (!argument1.match(/^\w+$/) && !Blockly.isNumber(argument1)) {
@@ -120,7 +120,7 @@ Blockly.Arduino['controls_for'] = function(block) {
     // changes during loop execution.
     var incVar = Blockly.Arduino.variableDB_.getDistinctName(
         variable0 + '_inc', Blockly.Variables.NAME_TYPE);
-    code += 'var ' + incVar + ' = ';
+    code += 'int ' + incVar + ' = ';
     if (Blockly.isNumber(increment)) {
       code += Math.abs(increment) + ';\n';
     } else {
@@ -153,13 +153,13 @@ Blockly.Arduino['controls_forEach'] = function(block) {
   if (!argument0.match(/^\w+$/)) {
     listVar = Blockly.Arduino.variableDB_.getDistinctName(
         variable0 + '_list', Blockly.Variables.NAME_TYPE);
-    code += 'var ' + listVar + ' = ' + argument0 + ';\n';
+    code += 'int ' + listVar + ' = ' + argument0 + ';\n';
   }
   var indexVar = Blockly.Arduino.variableDB_.getDistinctName(
       variable0 + '_index', Blockly.Variables.NAME_TYPE);
   branch = Blockly.Arduino.INDENT + variable0 + ' = ' +
       listVar + '[' + indexVar + '];\n' + branch;
-  code += 'for (var ' + indexVar + ' in ' + listVar + ') {\n' + branch + '}\n';
+  code += 'for (int ' + indexVar + ' in ' + listVar + ') {\n' + branch + '}\n';
   return code;
 };
 

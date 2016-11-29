@@ -42,7 +42,7 @@ Blockly.Arduino['mw_write_output'] = function(block) {
   var pwm_value = Blockly.Arduino.valueToCode(block, 'pwm_value', Blockly.Arduino.ORDER_ATOMIC);
   var dropdown_pwm_channel = block.getFieldValue('pwm_channel');
 
-  var code = 'analogWrite((int)('+dropdown_pwm_channel+'*2.56), '+pwm_value+');\n';
+  var code = 'analogWrite('+dropdown_pwm_channel+', (int)('+pwm_value+'*2.55));\n';
   return code;
 };
 
@@ -77,7 +77,7 @@ Blockly.Arduino['mw_action_actuator'] = function(block) {
   var pwm_value = Blockly.Arduino.valueToCode(block, 'pwm_value', Blockly.Arduino.ORDER_ATOMIC);
   var dropdown_pwm_channel = block.getFieldValue('output_number');
 
-  var code = 'analogWrite((int)('+dropdown_pwm_channel+'*2.56), '+pwm_value+');\n';
+  var code = 'analogWrite('+dropdown_pwm_channel+', (int)('+pwm_value+'*2.55));\n';
   return code;
 };
 
@@ -86,7 +86,7 @@ Blockly.Arduino['mw_action_display'] = function(block) {
   var pwm_value = Blockly.Arduino.valueToCode(block, 'pwm_value', Blockly.Arduino.ORDER_ATOMIC);
   var dropdown_pwm_channel = block.getFieldValue('output_number');
 
-  var code = 'analogWrite((int)('+dropdown_pwm_channel+'*2.56), '+pwm_value+');\n';
+  var code = 'analogWrite('+dropdown_pwm_channel+', (int)('+pwm_value+'*2.55));\n';
   return code;
 };
 
@@ -95,6 +95,6 @@ Blockly.Arduino['mw_action_sound'] = function(block) {
   var pwm_value = Blockly.Arduino.valueToCode(block, 'pwm_value', Blockly.Arduino.ORDER_ATOMIC);
   var dropdown_pwm_channel = block.getFieldValue('output_number');
 
-  var code = 'analogWrite((int)('+dropdown_pwm_channel+'*2.56), '+pwm_value+');\n';
+  var code = 'analogWrite('+dropdown_pwm_channel+', (int)('+pwm_value+'*2.55));\n';
   return code;
 };
