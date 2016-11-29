@@ -100,6 +100,10 @@ var outputs;
      Blockly.mainWorkspace.setVisible(true);
 
     //  Blockly.fireUiEvent(window, 'resize');
+
+    document.getElementById('content_blocks').style.left = 0;
+    document.getElementById('content_blocks').style.top = 55;
+    
  }
 
 /**
