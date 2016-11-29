@@ -2,6 +2,7 @@ const fs = require('fs');
 const sys = require('util')
 const exec = require('child_process').exec;
 const cmd = require('node-cmd');
+const SerialPort = require("serialport");
 
 var inputs;
 var outputs;
@@ -103,7 +104,7 @@ var outputs;
 
     document.getElementById('content_blocks').style.left = 0;
     document.getElementById('content_blocks').style.top = 55;
-    
+
  }
 
 /**
@@ -215,6 +216,7 @@ function load_by_url(uri) {
 
 function uploadClick() {
     //code now has the string value for the code. We can write this as an Arduino file.
+    debug_activated = false;
     var code = Blockly.Arduino.workspaceToCode();
 
     fs.writeFile("output/output.ino", code, function(err) {
@@ -234,6 +236,10 @@ function uploadClick() {
           console.log('uploading:\n\n',data);
       }
     );
+
+    var port = new SerialPort("/dev/tty-usbserial1", {
+      baudRate: 9600
+    });
 
 }
 

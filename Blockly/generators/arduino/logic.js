@@ -32,6 +32,7 @@ Blockly.Arduino['controls_if'] = function(block) {
   // If/elseif/else condition.
   var n = 0;
   var code = '', branchCode, conditionCode;
+  code += addDebugMode("STEP", block.id);
   do {
     conditionCode = Blockly.Arduino.valueToCode(block, 'IF' + n,
       Blockly.Arduino.ORDER_NONE) || 'false';

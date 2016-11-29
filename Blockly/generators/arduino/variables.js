@@ -40,5 +40,10 @@ Blockly.Arduino['variables_set'] = function(block) {
       Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
   var varName = Blockly.Arduino.variableDB_.getName(
       block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-  return varName + ' = ' + argument0 + ';\n';
+
+  var code = '';
+  code += addDebugMode("STEP", block.id);
+  code += varName + ' = ' + argument0 + ';\n'
+
+  return code;
 };

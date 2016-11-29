@@ -41,7 +41,9 @@ Blockly.Arduino['controls_repeat_ext'] = function(block) {
   }
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+  branch += addDebugMode("STEP", block.id);
   var code = '';
+  code += addDebugMode("STEP", block.id);
   var loopVar = Blockly.Arduino.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
   var endVar = repeats;
@@ -68,10 +70,16 @@ Blockly.Arduino['controls_whileUntil'] = function(block) {
       Blockly.Arduino.ORDER_NONE) || 'false';
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
+  branch += addDebugMode("STEP", block.id);
   if (until) {
     argument0 = '!' + argument0;
   }
-  return 'while (' + argument0 + ') {\n' + branch + '}\n';
+
+  var code = '';
+  code += addDebugMode("STEP", block.id);
+  code += 'while (' + argument0 + ') {\n' + branch + '}\n'
+
+  return code;
 };
 
 Blockly.Arduino['controls_for'] = function(block) {
@@ -86,12 +94,14 @@ Blockly.Arduino['controls_for'] = function(block) {
       Blockly.Arduino.ORDER_ASSIGNMENT) || '1';
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
-  var code;
+  branch += addDebugMode("STEP", block.id);
+  var code = '';
   if (Blockly.isNumber(argument0) && Blockly.isNumber(argument1) &&
       Blockly.isNumber(increment)) {
     // All arguments are simple numbers.
     var up = parseFloat(argument0) <= parseFloat(argument1);
-    code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
+    code += addDebugMode("STEP", block.id);
+    code += 'for (' + variable0 + ' = ' + argument0 + '; ' +
         variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ' +
         variable0;
     var step = Math.abs(parseFloat(increment));
@@ -102,7 +112,8 @@ Blockly.Arduino['controls_for'] = function(block) {
     }
     code += ') {\n' + branch + '}\n';
   } else {
-    code = '';
+    code += '';
+    code += addDebugMode("STEP", block.id);
     // Cache non-trivial values to variables to prevent repeated look-ups.
     var startVar = argument0;
     if (!argument0.match(/^\w+$/) && !Blockly.isNumber(argument0)) {
@@ -129,6 +140,7 @@ Blockly.Arduino['controls_for'] = function(block) {
     code += 'if (' + startVar + ' > ' + endVar + ') {\n';
     code += Blockly.Arduino.INDENT + incVar + ' = -' + incVar + ';\n';
     code += '}\n';
+    code += addDebugMode("STEP", block.id);
     code += 'for (' + variable0 + ' = ' + startVar + '; ' +
         incVar + ' >= 0 ? ' +
         variable0 + ' <= ' + endVar + ' : ' +
@@ -165,11 +177,16 @@ Blockly.Arduino['controls_forEach'] = function(block) {
 
 Blockly.Arduino['controls_flow_statements'] = function(block) {
   // Flow statements: continue, break.
+  var code = '';
+  code += addDebugMode("STEP", block.id);
+
   switch (block.getFieldValue('FLOW')) {
     case 'BREAK':
-      return 'break;\n';
+      code += 'break;\n';
+      return code;
     case 'CONTINUE':
-      return 'continue;\n';
+      code += 'continue;\n';
+      return code;
   }
   throw 'Unknown flow statement.';
 };
