@@ -237,37 +237,37 @@ function uploadClick() {
       }
     );
 
-    var port = new SerialPort("/dev/tty-usbserial1", {
-      baudRate: 9600
-    });
-
-    var debugging = true;
-    curBlock = null;
-    prevBlock = null;
-
-    do {
-      port.on('data', function(data) {
-        if (data == "end") {
-          debugging = false;
-
-          if(prevBlock != null)
-            curBlock.removeSelect();
-        }
-        else {
-          curBlock = workspace.getBlockById(data);
-          curBlock.addSelect();
-
-          if(prevBlock != null)
-          {
-            prevBlock.removeSelect();
-          }
-
-          prevBlock = curBlock;
-        }
-      });
-    } while(debugging);
 
 }
+
+
+var port = new SerialPort("/dev/cu.usbmodem1421", {
+  baudrate: 9600,
+  parser: SerialPort.parsers.readline('\n')
+});
+
+var debugging = true;
+var curBlock = null;
+var prevBlock = null;
+
+port.on('data', function(data) {
+  console.log(data);
+
+  if (prevBlock != null)
+    prevBlock.removeSelect();
+
+  curBlock = workspace.getBlockById(data.toString());
+  curBlock.addSelect();
+
+  prevBlock = curBlock;
+
+});
+
+function stepOver() {
+  port.write('n');
+}
+
+
 
 ///Majeed Oct 28th: added a function to add a new block to the toolbox
 
