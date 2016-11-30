@@ -1,15 +1,15 @@
 # Arduino Make file. Refer to https://github.com/sudar/Arduino-Makefile
-ARDUINO_DIR   = ../../../../../../Arduino
-AVR_TOOLS_DIR = ../../../../../../Arduino/hardware/tools/avr
-ARDMK_DIR     = /cygdrive/c/Users/Majeed/Documents/GitHub/MakerWearBlockly/ArduinoMakefile
-MONITOR_PORT  = COM4
-BOARD_TAG     = atmega328bb
-ARCHITECTURE  = avr
-BOARDS_TXT = /cygdrive/c/Users/Majeed/Documents/Arduino/hardware/breadboard/avr/boards.txt
 
+BOARD_TAG    = uno
 include ../ArduinoMakefile/Arduino.mk
 
 # --- Arduino Uno ide 1.6
+ARDUINO_DIR   = /Applications/Arduino.app/Contents/Java
+ARDMK_DIR     = /usr/local
+AVR_TOOLS_DIR = /Applications/Arduino.app/Contents/Java/hardware/tools/avr
+MONITOR_PORT  = /dev/ttyACM0
+BOARD_TAG     = uno
+
 
 # --- leonardo (or pro micro w/leo bootloader)
 #BOARD_TAG    = leonardo

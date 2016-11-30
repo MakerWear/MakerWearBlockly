@@ -228,49 +228,63 @@ function uploadClick() {
     });
 
     //on mac:
-    //cmd.run('./upload.sh');
+    cmd.run('./upload.sh');
 
     //on windows:
-    cmd.get('upload.bat',
-      function(data){
-          console.log('uploading:\n\n',data);
-      }
-    );
+    // cmd.get('upload.bat',
+    //   function(data){
+    //       console.log('uploading:\n\n',data);
+    //   }
+    // );
 
 
 }
 
 
-var port = new SerialPort("/dev/cu.usbmodem1421", {
-  baudrate: 9600,
-  parser: SerialPort.parsers.readline('\n')
-});
 
-var debugging = true;
+var debugging = false;
 var curBlock = null;
 var prevBlock = null;
+var port;
 
-port.on('data', function(data) {
-  console.log(data);
+function startDebugging() {
+  debugging = true;
+  curBlock = null;
+  prevBlock = null;
 
-  if (prevBlock != null)
-    prevBlock.removeSelect();
+  port = new SerialPort("/dev/cu.usbmodem1421", {
+    baudrate: 9600,
+    parser: SerialPort.parsers.readline('\n')
+  });
 
-  curBlock = workspace.getBlockById(data.toString());
-  curBlock.addSelect();
+  if(debugging)
+  {
+    port.on('data', function(data) {
 
-  prevBlock = curBlock;
+      data = data.substring(0,20); //to get rid of the ending null character
+      console.log(data);
 
-});
+      if (prevBlock != null)
+        prevBlock.removeSelect(); //removes the highlight from the previously selected block
+
+      curBlock = workspace.getBlockById(data.toString()); //gets the currect block to be highlighted (that will run when we press step over)
+      curBlock.addSelect(); //highlights it
+
+      prevBlock = curBlock; //update prevBlock for next iteration
+
+    });
+  }
+
+}
+
+
 
 function stepOver() {
   port.write('n');
 }
 
 
-
 ///Majeed Oct 28th: added a function to add a new block to the toolbox
-
 function addMotionSensor() {
     var parser = new DOMParser();
 
