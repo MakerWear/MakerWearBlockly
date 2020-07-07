@@ -15,7 +15,7 @@
   ],
   "author": "Majeed Kazemitabaar",
   "devDependencies": {
-    "electron": "^1.4.1",
+    "electron": "^9.1.0",
     "electron-rebuild": "^1.4.0"
   }
 }
